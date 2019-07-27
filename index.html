@@ -7,40 +7,65 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body>
-    <div class="container mb-3 pb-3 pt-3 mt-2">
-        <div class="row">
-            <div class="col-3 jumbotron">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut eveniet alias consequuntur at facere numquam necessitatibus consectetur accusamus, nesciunt ducimus, fugiat quasi dignissimos deserunt impedit dolores commodi non explicabo quis repellendus nemo doloremque vitae nam ipsam! At accusamus est ipsum ducimus consequatur vero non facilis minima nisi, dolorem doloremque natus, nam animi a voluptate dolore! Voluptas dolor repellat veritatis iusto dolorem optio, voluptatem velit officiis vitae rem facilis doloremque, pariatur unde eos cupiditate provident ex. Placeat, fugit. Officia consequatur esse ullam earum ex, dolore rerum modi fugit velit atque molestiae nobis id maiores deleniti ipsum distinctio accusamus quibusdam nesciunt. Cumque?
-               
+    <div class="col" id="boostWidthCol">
+    <div class="container" id="mainContainer">
+        <div class="row" id="inputRow">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-8">
+                <form id="form">
+                    <label for="politician-input"></label>
+                    <input type="text" id="politician-input">
+                    <input id="add-politician" class="bg-info rounded text-white" type="submit" value="Submit">
+                </form>
             </div>
-            <div class="col-9 mt-2">
-                    <form id="form">  
-                        <label for="politician-input"></label>
-                        <input type="text" id="politician-input" class="col-10">
-                        <input id="add-politician" class="bg-info rounded text-white" type="submit" value="Submit">
-                    </form>
-                    <div class="jumbotron pt-3 mt-3 col-12">
-                        <div class="row politician-display">
-                                <div class="col-3">ok</div>
-                                <div class="col-3">ok</div>
-
-
-                        </div>
-                        
-                               
-                    </div>
-
-            </div>
-            <div id="buttons-view" class="col-12"></div>
-            
         </div>
-    </div>
-    
-    
+        <div class="row" id="mainRow">
 
-    <script type="text/javascript" src="assets/javascript/code.js"></script>
+            <div class="col-lg-4 col-md-12" id="calenderCol">
+                <div class="container" id="calendar">
+
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut eveniet alias consequuntur at
+                    facere
+                    numquam necessitatibus consectetur accusamus, nesciunt ducimus, fugiat quasi dignissimos
+                    deserunt
+                    impedit dolores commodi non explicabo quis repellendus nemo doloremque vitae nam ipsam! At
+                    accusamus
+                    est
+
+
+                </div>
+            </div>
+            <div class="col-lg-1 col-md-3 col-xs-0"></div>
+
+            <div class="col-lg-6 col-md-6 col-xs-12" id="candidateCol">
+                <div class="container" id="candidateContainer">
+                    <div class="row" id="insideCandidateRow">
+                        <div class="col-lg-6 col-md-6 col-xs-6" id="insideCandidateCols">Lorem ipsum, dolor sit
+                            amet consectetur adipisicing
+                            elit. Illo perspiciatis cumque neque qui sint sapiente impedit eius amet iste sunt
+                            voluptates rem a nemo, inventore ut officiis repudiandae minus quasi.</div>
+
+                        <div class="col-lg-6 col-md-6 col-xs-6" id="insideCandidateCols">Lorem ipsum dolor sit amet
+                            consectetur adipisicing
+                            elit. Doloremque sit blanditiis dolores debitis, quod harum quaerat suscipit facilis at?
+                            Est
+                            iure minus natus dicta enim dignissimos hic distinctio ducimus adipisci.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div id="buttons-view" class="col-12"></div> -->
+
+            <div class="col-lg-0 col-md-3 col-xs-0"></div>
+        </div>
+
+</div>
+
+        <script type="text/javascript" src="assets/javascript/code.js"></script>
 </body>
+
 </html>

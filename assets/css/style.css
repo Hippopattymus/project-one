@@ -1,0 +1,61 @@
+
+body{
+  
+  
+}
+#mainContainer{
+    border:solid black;
+    max-height:800px;
+    height:100%;
+    width:90%;
+    padding:50px;
+    position:relative;
+}
+#candidateContainer{
+    max-height:100%;
+    min-height:35%;
+    height:auto;
+    width:auto;
+    border:solid black;
+    padding:0px;
+    float:left;
+    
+}
+#politician-input{
+    max-width:80%;
+    width:100%;
+    height:25px;
+    margin-bottom: 50px;
+    border:solid black;
+    float:left;
+    
+}
+#calendar{
+    width:auto;
+    max-width:100%;
+    margin:0px;
+    border:solid black;
+    float:left;
+    height:auto;
+    min-height:35%;
+    overflow:auto;
+    margin-bottom:50px;
+
+}
+#insideCandidateRow{
+    margin:0px;
+    flex-wrap: nowrap;
+}
+
+#form{
+    width:100%;
+    float:left;
+    margin-left:50px;
+    margin-right:50px;
+}
+
+#boostWidthCol{
+    padding:0px;
+    max-height:800px;
+    height:100%;
+}
