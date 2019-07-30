@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Political App</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <div class="container">
+        <!-- Calendar -->
+        <div class="row">
+            <div class="col-lg-3">
+
+
+                <div class="row" id="calendar">
+                    <h1>Calendar</h1>
+                    <div class="col-lg-12 col-xs-12" id="calendarMainCol">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Event</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1/12</th>
+                                    <td>
+                                        "Event example"
+                                        <div id="calendarLocation">"Location"</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2/13</th>
+                                    <td>
+                                        "Event example"
+                                        <div id="calendarLocation">"Location"</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3/14</th>
+                                    <td colspan="2">
+                                        "Event example"
+                                        <div id="calendarLocation">"Location"</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-6">
+                        <btn id="calendarBtn">Add</btn>
+                    </div>
+                    <div class="col-6">
+                        <btn id="calendarBtn">Edit</btn>
+                    </div>
+                </div>
+            </div>
+            <!-- Politician comparison -->
+            <div class="col-lg-1 col-md-0"></div>
+            <div class="col-lg-8 col-md-12 col-xs-12">
+                <div class="row" id="candidateRow">
+                    <div class="col">
+                        <!-- Politician input -->
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            </div>
+                            <input type="text" id = "politician-input" class="form-control" />
+                            <button class="btn btn-outline-secondary" id = "add-politician" type="submit">Search</button>
+                        </div>
+                        <!-- Candidate 1 -->
+                        <div class="row" id="candidateColContainer">
+                            <div class="col-lg-6 col-xs-6" style="width:250px;">
+                                <!-- <div class="candidateCols">
+                                    <div class="candidatePicture"></div>
+                                    <div class="candidateName">Name</div>
+                                    <div class="candidateText">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Quibusdam ipsam suscipit, quae inventore doloribus ipsa
+                                        error velit maxime autem eius minus nemo voluptatem qui
+                                        rerum placeat eum quos assumenda laudantium?
+                                    </div> -->
+
+                                    <!-- <div class="candidateBtn">Delete</div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="assets/javascript/code.js"></script>
+</body>
+
+</html>
