@@ -15,98 +15,47 @@ function displayInfo() {
 
         console.log(results);
 
-        console.log(response.officials[0].photoUrl);
-        console.log(gif);
-        console.log(response.officials[0].name.split(". ").pop());
-        console.log(response.officials[0].name.split(" ")[0]);
-        $(".politician-display").empty();
-        for (var i = 0; i < results.officials.length; i++) {
-            var Fname = response.officials[0].name.split(" ")[0];
 
-            console.log(response.officials[0].name.includes("."));
+
+        for (var i = 0; i < results.officials.length; i++) {
+            var Fname = response.officials[i].name.split(" ")[0];
+
             if (response.officials[i].name.includes(".") == true) {
                 var Lname = response.officials[i].name.split(". ").pop();
             } else {
-                console.log(response.officials[i].name.split(" ").pop());
                 var Lname = response.officials[i].name.split(" ").pop();
             }
-            
-            console.log(gif == (Fname + " " + Lname));
-            // var Lname = response.officials[0].name.split(". ").pop();
+
             if (gif == (Fname + " " + Lname)) {
                 console.log(gif == (Fname + " " + Lname));
                 var gifDiv = $("<div class = 'card'>");
+                if (response.officials[i].party.charAt(0) == "R") {
+                    gifDiv.addClass("bg-danger");
+                } else if (response.officials[i].party.charAt(0) == "D") {
+                    gifDiv.addClass("bg-info");
+                } else {
+                    gifDiv.addClass("bg-warning");
+                }
 
-                //var rating = results[i].rating;
-                var p = $("<p class = 'ml-1'>").text(response.offices[i].name);
-                p.append(":<br>" + response.officials[i].name);
+                var p = $("<p class = 'ml-1'>").text(response.officials[i].name);
+                p.append(":<br>" + response.officials[i].party);
                 p.addClass("float-left");
 
                 var img = $("<img height = 100px width = 100px>");
                 img.attr("src", response.officials[i].photoUrl);
 
                 gifDiv.addClass("float-left");
-                // gifDiv.addClass("col-6")
+                gifDiv.addClass("col-6")
                 gifDiv.addClass("pol");
                 gifDiv.prepend(p);
                 gifDiv.prepend(img);
                 console.log(gifDiv);
                 $(".politician-display").prepend(gifDiv);
+                //$("#candidateColContainer").empty();
+                //$("#candidateColContainer").append(gifDiv);
             }
         }
     });
-}
-var id;
-
-function polInfo() {
-
-    var fecURL = "https://api.open.fec.gov/v1/names/candidates/?q=" + gif + "&q=&api_key=C3d9JfIClukpUOVPfcpEaagn6id3DICDlrcrIS8D";
-
-    $.ajax({
-        url: fecURL,
-        method: "GET"
-    }).then(function (response) {
-        results = response.results;
-        id = results[0];
-        console.log(id);
-        console.log(results);
-
-        //console.log(response.officials[0].photoUrl);
-
-        $(".politician-display").empty();
-        for (var i = 0; i < results.length; i++) {
-
-            var gifDiv = $("<div class = 'card'>");
-
-            //var rating = results[i].rating;
-            var p = $("<p class = 'ml-1'>").text(results[0].name);
-            p.append(id);
-            p.addClass("float-left");
-
-            var img = $("<img height = 100px width = 100px>");
-            // img.attr("src", resultsURL);
-
-            gifDiv.addClass("float-left");
-            // gifDiv.addClass("col-6")
-            gifDiv.addClass("pol");
-            gifDiv.prepend(p);
-            gifDiv.prepend(img);
-
-            $(".politician-display").prepend(gifDiv);
-
-        }
-    });
-
-    // var fecID = "https://api.open.fec.gov/v1/candidate/" + id + "/?&api_key=C3d9JfIClukpUOVPfcpEaagn6id3DICDlrcrIS8D";
-    // $.ajax({
-    //     url: fecID,
-    //     method: "GET"
-    // }).then(function (response) {
-    //     console.log(response);
-    //     res = response.results[0];
-
-    // });
-
 
     var proPID = "https://api.propublica.org/congress/v1/80-115/senate/members.json";
     $.ajax({
@@ -119,15 +68,34 @@ function polInfo() {
 
 
     });
-
 }
 
 
+function polInfo() {
+    var pID;
+    //provides name & ID
+    var fecURL = "https://api.open.fec.gov/v1/names/candidates/?q=" + gif + "&q=&api_key=C3d9JfIClukpUOVPfcpEaagn6id3DICDlrcrIS8D";
 
+    $.ajax({
+        url: fecURL,
+        method: "GET"
+    }).then(function (response) {
+        var res = response.results;
+        pID = res[0].id;
+        console.log(pID);
+        console.log(response);
+    });
+    //uses ID to get politician info
+    var fecID = "https://api.open.fec.gov/v1/candidate/" + pID + "/?&api_key=C3d9JfIClukpUOVPfcpEaagn6id3DICDlrcrIS8D";
+    $.ajax({
+        url: fecID,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response);
+        results = response.results[0];
 
-
-
-
+    });
+}
 
 
 // function renderButtons() {
@@ -153,7 +121,7 @@ $("#add-politician").on("click", function (event) {
 
 
     displayInfo();
-    //polInfo();
+    polInfo();
 
 });
 
@@ -179,11 +147,6 @@ $.ajax({
 }).then(function (response) {
     var electionResults = response;
 
-    console.log(electionResults);
-
-    //console.log(electionResults.officials[0].name);
-    // renderGifs();
-    //renderButtons();
     $(".left-bar").empty();
     for (var i = 0; i < electionResults.elections.length; i++) {
 
