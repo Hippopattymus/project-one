@@ -210,7 +210,7 @@ temporary rendered events).
 /* TODO: move to timegrid/daygrid */
 .fc-scroller > .fc-day-grid,
 .fc-scroller > .fc-time-grid {
-  position: relative;
+  /* position: relative; */
   /* re-scope all positions */
   width: 100%;
   /* hack to force re-sizing this inner element when scrollbars appear/disappear */ }
@@ -412,7 +412,7 @@ tr:first-child > td > .fc-day-grid-event {
 .fc-day-grid-event .fc-content {
   /* force events to be one-line tall */
   white-space: nowrap;
-  overflow: hidden; }
+  overflow: initial auto; }
 
 .fc-day-grid-event .fc-time {
   font-weight: bold; }
@@ -880,12 +880,12 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
   /* Vertical Scroller & Containers
   --------------------------------------------------------------------------------------------------*/
   /* kill the scrollbars and allow natural height */
-  .fc-scroller,
+
   .fc-day-grid-container,
   .fc-time-grid-container {
-    /* */
-    overflow: visible !important;
-    height: auto !important; }
+    
+    overflow: initial !important;
+}
 
   /* kill the horizontal border/padding used to compensate for scrollbars */
   .fc-row {

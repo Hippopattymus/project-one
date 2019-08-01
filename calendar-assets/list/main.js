@@ -139,8 +139,8 @@ Docs & License: https://fullcalendar.io/
                     _this.el.classList.add(listViewClassName);
                 }
             }
-            _this.scroller = new core.ScrollComponent('hidden', // overflow x
-            'auto' // overflow y
+            _this.scroller = new core.ScrollComponent('none', // overflow x
+            'none' // overflow y
             );
             _this.el.appendChild(_this.scroller.el);
             _this.contentEl = _this.scroller.el; // shortcut

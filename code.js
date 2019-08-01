@@ -125,13 +125,6 @@ function polInfo() {
 }
 
 
-
-
-
-
-
-
-
 // function renderButtons() {
 //     $(".left-bar").empty();
 //     for (var i = 0; i < results.elections.length; i++) {
@@ -205,11 +198,16 @@ $.ajax({
             right: 'dayGridMonth'
         },
 
+        views: {
+            listMonth: { buttonText: 'list month' },
+            // listWeek: { buttonText: 'list week' }
+          },
+
         defaultView: 'listMonth',
-        defaultDate: '2019-06-12',
-        navLinks: true, // can click day/week names to navigate views
-        editable: true,
-        eventLimit: true, // allow "more" link when too many events
+        defaultDate: '2019-08-01',
+        navLinks: false, // can click day/week names to navigate views
+        editable: false,
+        eventLimit: false, // allow "more" link when too many events
         events: events
 });
 
