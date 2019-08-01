@@ -44,7 +44,7 @@ function displayInfo() {
                 p.append("<hr> Lorem ipsum dolor sit amet, consectetur adipisicing elit Quibusdam ipsam suscipit, quae inventore doloribus ipsa");
                 
 
-                var img = $("<img class = 'candidatePicture' height= 150px width= 150px>");
+                var img = $("<img class='candidatePicture' height='150px' width='150px'>");
                 img.attr("src", response.officials[i].photoUrl);
                 img.addClass("pt-3");
                 //img.addClass("float-left");
