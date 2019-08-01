@@ -198,17 +198,34 @@ $.ajax({
         defaultDate: '2019-06-12',
         navLinks: true, // can click day/week names to navigate views
         editable: true,
-        eventLimit: true, // allow "more" link when too many events
+        eventLimit: true // allow "more" link when too many events
+
+        // response = [
+        //     {
+        //       id: "2000",
+        //       name: "VIP Test Election",
+        //       electionDay: "2021-06-06",
+        //       ocdDivisionId: "ocd-division/country:us"
+        //     }
+
+        //     {
+        //         // title: electionResults.elections[1].name,
+        //         // start: electionResults.elections[1].electionDay
+        //     }
+
+        // ];
+    });
+
+        let newArray = [];
+        for (let i = 0; i < response.length; i++) {
+          newArray.push({
+            title: response[i].name,
+            start: response[i].electionDay
+          });
+        }
         
-        events: [
+        console.log(newArray);
 
-            {
-                title: electionResults.elections[1].name,
-                start: electionResults.elections[1].electionDay
-            }
-
-        ]
-    })
     calendar.render();
     console.log(JSON.stringify(electionResults.elections));
     console.log(electionResults.elections[1].name);
