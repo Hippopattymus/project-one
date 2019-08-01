@@ -27,7 +27,7 @@ function displayInfo() {
 
             if (pol == (Fname + " " + Lname)) {
                 
-                var polDiv = $("<div class = 'rounded col-lg-6 col-xs-6' width= 250px>");
+                var polDiv = $("<div class='rounded col-lg-6 col-xs-6' width='250px'>");
                
                 if (response.officials[i].party.charAt(0) == "R") {
                     polDiv.addClass("bg-danger");
