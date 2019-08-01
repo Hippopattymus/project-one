@@ -8201,7 +8201,8 @@ Docs & License: https://fullcalendar.io/
                 // if not valid, display text, but no link
                 innerHtml) +
             '</th>';
-    }
+            }
+
 
     var DayHeader = /** @class */ (function (_super) {
         __extends(DayHeader, _super);
