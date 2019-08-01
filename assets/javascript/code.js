@@ -1,80 +1,98 @@
-var gifs = [];
+var pols = [];
 var results;
-var gif;
-
+var pol;
+var ID;
+$("#candidateColContainer").empty();
+//intakes location and provides offices on a local, state, and federal level
 function displayInfo() {
     var repURL = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAxErsgI2POFlBroc_QuXNof9gx4cOtzpg&address=%20Sacramento%20CA";
-
+    var Fname = "";
+    var Lname = "";
     $.ajax({
         url: repURL,
         method: "GET"
     }).then(function (response) {
         results = response;
-        //resultsURL = 
-        //resultsName = response.officials[0].name;
 
         console.log(results);
 
-
-
         for (var i = 0; i < results.officials.length; i++) {
-            var Fname = response.officials[i].name.split(" ")[0];
+            Fname = response.officials[i].name.split(" ")[0];
 
             if (response.officials[i].name.includes(".") == true) {
-                var Lname = response.officials[i].name.split(". ").pop();
+                Lname = response.officials[i].name.split(". ").pop();
             } else {
-                var Lname = response.officials[i].name.split(" ").pop();
+                Lname = response.officials[i].name.split(" ").pop();
             }
 
-            if (gif == (Fname + " " + Lname)) {
-                console.log(gif == (Fname + " " + Lname));
-                var gifDiv = $("<div class = 'card'>");
+            if (pol == (Fname + " " + Lname)) {
+                console.log(pol == (Fname + " " + Lname));
+                var polDiv = $("<div class = 'card'>");
                 if (response.officials[i].party.charAt(0) == "R") {
-                    gifDiv.addClass("bg-danger");
+                    polDiv.addClass("bg-danger");
                 } else if (response.officials[i].party.charAt(0) == "D") {
-                    gifDiv.addClass("bg-info");
+                    polDiv.addClass("bg-info");
                 } else {
-                    gifDiv.addClass("bg-warning");
+                    polDiv.addClass("bg-warning");
                 }
 
-                var p = $("<p class = 'ml-1'>").text(response.officials[i].name);
-                p.append(":<br>" + response.officials[i].party);
+                var p = $("<p class = 'pt-2'>").text(response.officials[i].name);
+                p.append("<hr>" + response.officials[i].party);
                 p.addClass("float-left");
 
                 var img = $("<img height = 100px width = 100px>");
                 img.attr("src", response.officials[i].photoUrl);
+                img.addClass("pt-2");
 
-                gifDiv.addClass("float-left");
-                gifDiv.addClass("col-6")
-                gifDiv.addClass("pol");
-                gifDiv.prepend(p);
-                gifDiv.prepend(img);
-                console.log(gifDiv);
-                $(".politician-display").prepend(gifDiv);
+                polDiv.addClass("float-left");
+                polDiv.addClass("col-6");
+                polDiv.addClass("pol");
+                polDiv.prepend(p);
+                polDiv.prepend(img);
+                //console.log(polDiv);
+                //$(".politician-display").prepend(polDiv);
                 //$("#candidateColContainer").empty();
-                //$("#candidateColContainer").append(gifDiv);
+                $("#candidateColContainer").append(polDiv);
+                return;
             }
+            
         }
     });
 
-    var proPID = "https://api.propublica.org/congress/v1/80-115/senate/members.json";
+    //info on congress members and votes
+    var proPID = "https://api.propublica.org/congress/v1/115/senate/members.json";
     $.ajax({
         url: proPID,
         method: "GET",
         dataType: 'json',
         headers: { 'X-API-Key': 'DfzwwQMoV3GLNmW5UL8qne5wHKFRrYWACsBisfWl' }
     }).then(function (response) {
-        console.log(response);
+        console.log(response); 
+        console.log(response.results[0].members.length);
+        console.log(Fname);
+        console.log(Lname);
 
+        for (var i=0; i < response.results[0].members.length ; i++){
+            //console.log(response.results[0].members[i].first_name);
+            //console.log(response.results[0].members[i].last_name);
+
+            if (Fname == response.results[0].members[i].first_name && Lname == response.results[0].members[i].last_name){
+                ID = response.results[0].members[i].id;
+                console.log(ID);
+                console.log(response.results[0].members[i]);
+
+            }
+        }
+        
 
     });
 }
 
-
+//search 
 function polInfo() {
     var pID;
-    //provides name & ID
-    var fecURL = "https://api.open.fec.gov/v1/names/candidates/?q=" + gif + "&q=&api_key=C3d9JfIClukpUOVPfcpEaagn6id3DICDlrcrIS8D";
+    //input name of any candidate, provides ID and some info
+    var fecURL = "https://api.open.fec.gov/v1/names/candidates/?q=" + pol + "&q=&api_key=C3d9JfIClukpUOVPfcpEaagn6id3DICDlrcrIS8D";
 
     $.ajax({
         url: fecURL,
@@ -86,7 +104,7 @@ function polInfo() {
         console.log(response);
     });
     //uses ID to get politician info
-    var fecID = "https://api.open.fec.gov/v1/candidate/" + pID + "/?&api_key=C3d9JfIClukpUOVPfcpEaagn6id3DICDlrcrIS8D";
+    var fecID = "https://api.open.fec.gov/v1/candidate/P80001571/?&api_key=C3d9JfIClukpUOVPfcpEaagn6id3DICDlrcrIS8D";
     $.ajax({
         url: fecID,
         method: "GET"
@@ -105,7 +123,7 @@ function polInfo() {
 //         a.addClass("movie");
 
 //         //a.addClass("btn-info");
-//         a.attr("data-name", gifs[i]);
+//         a.attr("data-name", pols[i]);
 
 //         //a.text(electionResults);
 //         $(".left-bar").append(a);
@@ -115,9 +133,9 @@ function polInfo() {
 
 $("#add-politician").on("click", function (event) {
     event.preventDefault();
-    gif = $("#politician-input").val().trim();
+    pol = $("#politician-input").val().trim();
     $("#politician-input").val("");
-    gifs.push(gif);
+    pols.push(pol);
 
 
     displayInfo();
@@ -163,7 +181,7 @@ $.ajax({
         x.addClass("float-right");
 
         //a.addClass("btn-info");
-        a.attr("data-name", gifs[i]);
+        a.attr("data-name", pols[i]);
         a.text(electionResults.elections[i].electionDay.split("9-").pop());
         a.append("<br>" + electionResults.elections[i].name);
 
