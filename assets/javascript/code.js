@@ -26,8 +26,9 @@ function displayInfo() {
             }
 
             if (pol == (Fname + " " + Lname)) {
-                console.log(pol == (Fname + " " + Lname));
-                var polDiv = $("<div class = 'card'>");
+                
+                var polDiv = $("<div class = 'rounded col-lg-6 col-xs-6' width= 250px>");
+               
                 if (response.officials[i].party.charAt(0) == "R") {
                     polDiv.addClass("bg-danger");
                 } else if (response.officials[i].party.charAt(0) == "D") {
@@ -35,17 +36,20 @@ function displayInfo() {
                 } else {
                     polDiv.addClass("bg-warning");
                 }
-
-                var p = $("<p class = 'pt-2'>").text(response.officials[i].name);
+                
+                var p = $("<p class = 'pt-2 candidateText'>").text(response.officials[i].name);
                 p.append("<hr>" + response.officials[i].party);
-                p.addClass("float-left");
+                p.append("<hr>" + response.officials[i].phones[0]);
+                p.append("<hr>" + response.officials[i].urls[0]);
+                p.append("<hr> Lorem ipsum dolor sit amet, consectetur adipisicing elit Quibusdam ipsam suscipit, quae inventore doloribus ipsa");
+                
 
-                var img = $("<img height = 100px width = 100px>");
+                var img = $("<img class = 'candidatePicture' height= 150px width= 150px>");
                 img.attr("src", response.officials[i].photoUrl);
-                img.addClass("pt-2");
-
-                polDiv.addClass("float-left");
-                polDiv.addClass("col-6");
+                img.addClass("pt-3");
+                //img.addClass("float-left");
+               
+            
                 polDiv.addClass("pol");
                 polDiv.prepend(p);
                 polDiv.prepend(img);
@@ -165,7 +169,7 @@ $.ajax({
 }).then(function (response) {
     var electionResults = response;
 
-    $(".left-bar").empty();
+    $("#calendarMainCol").empty();
     for (var i = 0; i < electionResults.elections.length; i++) {
 
         var r = $("<div class = 'row'>");
@@ -189,7 +193,7 @@ $.ajax({
         r.append(a);
         r.append(x);
         r.attr("state", "hidden");
-        $(".left-bar").append(r);
+        $("#calendarMainCol").append(r);
         //$(".left-bar").append(x);
     }
 
