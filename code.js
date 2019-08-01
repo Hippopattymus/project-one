@@ -1,6 +1,7 @@
 var gifs = [];
 var results;
 var gif;
+var candidateBio;
 
 function displayInfo() {
     var repURL = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAxErsgI2POFlBroc_QuXNof9gx4cOtzpg&address=%20Sacramento%20CA";
@@ -185,7 +186,7 @@ $.ajax({
           start: response.elections[i].electionDay
         });
     
-        console.log(response.elections[i]);
+        // console.log(response.elections[i]);
       }
     
 
@@ -211,7 +212,7 @@ $.ajax({
         events: events
 });
 
-    console.log(events);
+    // console.log(events);
 
     calendar.render();
     // console.log(JSON.stringify(electionResults.elections));
@@ -301,3 +302,18 @@ function deleteBtn() {
 
 //delete button
 $(document).on("click", ".x", deleteBtn);
+
+//ajax call for wiki bio snippets
+
+
+
+var bioURL = "https://en.wikipedia.org/api/rest_v1/page/summary/Bernie_Sanders";
+
+$.ajax({
+    url: bioURL,
+    method: "GET"
+}).then(function (response) {
+    console.log(response);
+   $("#pol-1").text(response.extract)
+});
+
