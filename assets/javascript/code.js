@@ -47,6 +47,7 @@ function displayInfo() {
 
                 var img = $("<img class = 'candidatePicture pt-3' height= 150px width= 150px>");
                 img.attr("src", response.officials[i].photoUrl);
+                
 
 
                 polDiv.addClass("pol");
@@ -209,7 +210,7 @@ $("#add-politician").on("click", function (event) {
 
     //displayInfo();
     //polInfo();
-    displayInfo();
+    lgbtInfo(lgbtURL);
 
 });
 
