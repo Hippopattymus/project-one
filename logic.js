@@ -124,14 +124,14 @@ function polInfo() { //unused function, APIs didnt provide proper info
 }
 
 function renderDiv(i) {
-
-    var polDiv = $("<div class='card shadow rounded float-left' width='18rem' style='margin: 15px;'>");
+    console.log(reslgbt[0].connections[0]);
+    var polDiv = $("<div class='card shadow rounded float-left' width='18rem'>");
     polDiv.addClass("pol-" + pols.indexOf(name));
 
     if (reslgbt[i].party.charAt(0) == "R") {
         polDiv.addClass("border border-danger");
     } else if (reslgbt[i].party.charAt(0) == "D") {
-        polDiv.addClass("border border-info");
+        polDiv.addClass("border border-primary");
     } else {
         polDiv.addClass("border border-warning");
     }
@@ -151,7 +151,10 @@ function renderDiv(i) {
     var divO = $("<div class='collapse' style='width:18rem;'>");
     divO.attr("id", "collapse" + i);
     var divI = $("<div class='card card-body border-0'>");
+
     bio(divI);
+
+    
 
     var x = $("<button class ='btn btn-danger x rounded' style='position: absolute'>");
     x.attr("val", pols.indexOf(name));
@@ -175,27 +178,18 @@ function renderDiv(i) {
         a.text("Facebook");
         a.attr("href", reslgbt[i].linkfacebook);
     }
+
+    divI.prepend($("<div style='font-weight: bolder'>").text(reslgbt[i].connections[3] + ": " + reslgbt[i].connections[4]));
+    divI.prepend($("<div style='font-weight: bolder'>").text(reslgbt[i].connections[0] + ": " + reslgbt[i].connections[1]));
+    divI.prepend("<br> <strong>Voting History </strong>");
     divI.append(a);
     divO.append(divI);
   
     polDiv.append(b);
     polDiv.append(divO);
-     
-     
-    // if ($("group-"+j).childElementCount >= 5 || grp == "") {
-    //     grp = $("<div class='card-group'>");
-    //     grp.attr("id", "group-" + j);
-    //     console.log(grp);
-    //     grp.append(polDiv);
-    //     $(".display-politicians").append(grp);
-    //     j++
-    // } else {
-    //     grp.append(polDiv);
-    // }
 
-    
     $(".display-politicians").prepend(polDiv);
-   
+  
 }
 
 function lgbtInfo(lgbtURL) {
@@ -210,11 +204,11 @@ function lgbtInfo(lgbtURL) {
                 name = reslgbt[i].name;
                 pols.push(name);
                 renderDiv(i);
-                console.log(name);
             } else if (pol == "" && reslgbt[i].state == "CA") {
                 name = reslgbt[i].name;
                 pols.push(name);
                 renderDiv(i);
+                
             }
         }
         pol = "";
@@ -260,7 +254,6 @@ $.ajax({
         });
     }
 
-
     var calendar = new FullCalendar.Calendar(calendarEl, {
         plugins: ['list'],
 
@@ -286,27 +279,25 @@ $.ajax({
 
 
     calendar.render();
-    // console.log(JSON.stringify(electionResults.elections));
 })
 
 
 function deleteBtn() {
     var del = $(this).attr("val");
     $(".pol-" + del).remove();
-
 }
 
-function hideBtn() {
-    var del = $(this).attr("val");
+// function hideBtn() {
+//     var del = $(this).attr("val");
 
-    if ($(this).attr("state") == "hidden") {
-        $(".election-" + del).show();
-        $(this).attr("state", "shown");
-    } else {
-        $(".election-" + del).hide();
-        $(this).attr("state", "hidden");
-    }
-}
+//     if ($(this).attr("state") == "hidden") {
+//         $(".election-" + del).show();
+//         $(this).attr("state", "shown");
+//     } else {
+//         $(".election-" + del).hide();
+//         $(this).attr("state", "hidden");
+//     }
+// }
 
 //delete onclick
 $(document).on("click", ".x", deleteBtn);
@@ -320,7 +311,7 @@ function bio(p) {
     }).then(function (response) {
         console.log(response);
         console.log(response.extract.split(".")[0] + "." + response.extract.split(".")[1] + "." + response.extract.split(".")[2] + "." + response.extract.split(".")[3] + ".");
-        var dio = (response.extract.split(".")[0] + "." + response.extract.split(".")[1] + "." + response.extract.split(".")[2] + "." + response.extract.split(".")[3]);
+        var dio = $("<div>").text(response.extract.split(".")[0] + "." + response.extract.split(".")[1] + "." + response.extract.split(".")[2] + "." + response.extract.split(".")[3]);
 
         p.prepend(dio);
     });
