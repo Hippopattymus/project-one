@@ -131,7 +131,7 @@ function renderDiv(i) {
     if (reslgbt[i].party.charAt(0) == "R") {
         polDiv.addClass("border border-danger");
     } else if (reslgbt[i].party.charAt(0) == "D") {
-        polDiv.addClass("border border-info");
+        polDiv.addClass("border border-primary");
     } else {
         polDiv.addClass("border border-warning");
     }
