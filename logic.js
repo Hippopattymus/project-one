@@ -8,7 +8,7 @@ var j = 0;
 
 $(".display-politician").empty();
 //intakes location and provides offices on a local, state, and federal level
-function displayInfo() {
+function displayInfo() { //unused function, API didnt provide proper info
     var repURL = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAxErsgI2POFlBroc_QuXNof9gx4cOtzpg&address=%20Sacramento%20CA";
     var Fname = "";
     var Lname = "";
@@ -97,7 +97,7 @@ function displayInfo() {
 }
 
 //search 
-function polInfo() {
+function polInfo() { //unused function, APIs didnt provide proper info
     var pID;
     //input name of any candidate, provides ID and some info
     var fecURL = "https://api.open.fec.gov/v1/names/candidates/?q=" + pol + "&q=&api_key=C3d9JfIClukpUOVPfcpEaagn6id3DICDlrcrIS8D";
@@ -125,15 +125,15 @@ function polInfo() {
 
 function renderDiv(i) {
 
-    var polDiv = $("<div class='card border-0 shadow mb-5 rounded' >");
+    var polDiv = $("<div class='card shadow rounded float-left' width='18rem' style='margin: 15px;'>");
     polDiv.addClass("pol-" + pols.indexOf(name));
 
     if (reslgbt[i].party.charAt(0) == "R") {
-        polDiv.addClass("bg-danger");
+        polDiv.addClass("border border-danger");
     } else if (reslgbt[i].party.charAt(0) == "D") {
-        polDiv.addClass("bg-info");
+        polDiv.addClass("border border-info");
     } else {
-        polDiv.addClass("bg-warning");
+        polDiv.addClass("border border-warning");
     }
 
     var b = $("<button class='btn' type='button' data-toggle='collapse' aria-expanded='false'>")
@@ -142,60 +142,60 @@ function renderDiv(i) {
     var img = $("<img class='card-img-top'>");
     img.attr("src", reslgbt[i].icon);
     var titleDiv = $("<div class='card-headings mx-auto text-center mt-2'>");
-    
     titleDiv.append($("<h4 class='card-title'>").text(reslgbt[i].name));
     titleDiv.append($("<h5>").text(reslgbt[i].party));
     titleDiv.append($("<h6>").text(reslgbt[i].title + " of " + reslgbt[i].state));
     b.append(img);
     b.append(titleDiv);
 
-    var divO = $("<div class='collapse'>");
+    var divO = $("<div class='collapse' style='width:18rem;'>");
     divO.attr("id", "collapse" + i);
     var divI = $("<div class='card card-body border-0'>");
     bio(divI);
 
-    var x = $('<button class = x rounded>');
+    var x = $("<button class ='btn btn-danger x rounded' style='position: absolute'>");
     x.attr("val", pols.indexOf(name));
     x.text("X");
+    x.addClass("float-right");
+    b.prepend(x);
 
     if (reslgbt[i].contact != null) {
         var a = $("<a>");
+        a.addClass("btn btn-primary mt-2");
         a.text("Contact Info");
         a.attr("href", reslgbt[i].contact);
     } else if ((reslgbt[i].contact == null) && (reslgbt[i].linktwitter != null)) {
         var a = $("<a>");
+        a.addClass("btn btn-primary mt-2");
         a.text("Twitter");
         a.attr("href", reslgbt[i].linktwitter);
     } else {
         var a = $("<a>");
+        a.addClass("btn btn-primary mt-2");
         a.text("Facebook");
         a.attr("href", reslgbt[i].linkfacebook);
     }
     divI.append(a);
     divO.append(divI);
-
+  
     polDiv.append(b);
     polDiv.append(divO);
+     
+     
+    // if ($("group-"+j).childElementCount >= 5 || grp == "") {
+    //     grp = $("<div class='card-group'>");
+    //     grp.attr("id", "group-" + j);
+    //     console.log(grp);
+    //     grp.append(polDiv);
+    //     $(".display-politicians").append(grp);
+    //     j++
+    // } else {
+    //     grp.append(polDiv);
+    // }
 
-
-    console.log($("#display-politicians").childElementCount);
-
-
-    if ($("group-" + j).childElementCount >= 5 || grp == "") {
-        grp = $("<div class='card-group'>");
-        grp.attr("id", "group-" + j);
-        console.log(grp);
-        grp.append(polDiv);
-        $(".display-politicians").append(grp);
-        j++
-    } else {
-        grp.append(polDiv);
-    }
-
-
-
-
-    polDiv.append(x);
+    
+    $(".display-politicians").prepend(polDiv);
+   
 }
 
 function lgbtInfo(lgbtURL) {
@@ -207,11 +207,11 @@ function lgbtInfo(lgbtURL) {
         console.log(reslgbt);
         for (var i = 0; i < reslgbt.length; i++) {
             if (pol != "") {
-                name = pol;
+                name = reslgbt[i].name;
                 pols.push(name);
                 renderDiv(i);
                 console.log(name);
-            } else if (pol == "" && reslgbt[i].state == "ND") {
+            } else if (pol == "" && reslgbt[i].state == "CA") {
                 name = reslgbt[i].name;
                 pols.push(name);
                 renderDiv(i);
@@ -230,7 +230,6 @@ $("#add-politician").on("click", function (event) {
     lgbtInfo(lgbtURL);
 
     $("#politician-input").val("");
-
 });
 
 $("#add-congress").on("click", function (event) {
@@ -241,19 +240,6 @@ $("#add-congress").on("click", function (event) {
     lgbtInfo(lgbtURL);
 
 });
-
-// $(document).on("click", ".still", function (event) {
-
-//     var state = $(this).attr("data-state");
-//     console.log(state);
-//     if (state == "still") {
-//         $(this).attr("src", $(this).attr("data-animate"));
-//         $(this).attr("data-state", "animate");
-//     } else {
-//         $(this).attr("src", $(this).attr("data-still"));
-//         $(this).attr("data-state", "still");
-//     }
-// });
 
 //calendar
 var electionsURL = "https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyAxErsgI2POFlBroc_QuXNof9gx4cOtzpg";
@@ -301,7 +287,6 @@ $.ajax({
 
     calendar.render();
     // console.log(JSON.stringify(electionResults.elections));
-
 })
 
 
@@ -321,14 +306,12 @@ function hideBtn() {
         $(".election-" + del).hide();
         $(this).attr("state", "hidden");
     }
-
 }
 
-//delete button
+//delete onclick
 $(document).on("click", ".x", deleteBtn);
 
 function bio(p) {
-
     var bioURL = "https://en.wikipedia.org/api/rest_v1/page/summary/" + name;
 
     $.ajax({
@@ -337,7 +320,7 @@ function bio(p) {
     }).then(function (response) {
         console.log(response);
         console.log(response.extract.split(".")[0] + "." + response.extract.split(".")[1] + "." + response.extract.split(".")[2] + "." + response.extract.split(".")[3] + ".");
-        var dio = (response.extract.split(".")[0] + "." + response.extract.split(".")[1] + "." + response.extract.split(".")[2] + "." + response.extract.split(".")[3] + ".");
+        var dio = (response.extract.split(".")[0] + "." + response.extract.split(".")[1] + "." + response.extract.split(".")[2] + "." + response.extract.split(".")[3]);
 
         p.prepend(dio);
     });
